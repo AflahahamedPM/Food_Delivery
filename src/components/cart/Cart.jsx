@@ -13,16 +13,18 @@ const Cart = () => {
 
   const router = useRouter();
   const { publishNotification } = useAlert();
-  const { cartDetails, removeFromCart, updateCartCount, orderSummary } = useServices();
+  const { cartDetails, removeFromCart, updateCartCount, orderSummary } =
+    useServices();
 
-  //   useEffect(() => {
-  //     if (!isLoggedIn) {
-  //       publishNotification("Please login to access the cart", "error");
-  //       setTimeout(() => {
-  //         router.push("/auth/login");
-  //       }, 200);
-  //     }
-  //   }, [isLoggedIn]);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (!isLoggedIn) {
+        publishNotification("Please login to access the cart", "error");
+        router.push("/auth/login");
+      }
+    }, 200); 
+    return () => clearTimeout(timer);
+  }, [isLoggedIn]);
 
   return (
     <div className="sm:w-9/12 w-10/12 mx-auto mt-10">
@@ -33,8 +35,8 @@ const Cart = () => {
           removeFromCart={removeFromCart}
           updateCartCount={updateCartCount}
         />
-        
-        <OrderSummary orderSummary={orderSummary} cartDetails={cartDetails}/>
+
+        <OrderSummary orderSummary={orderSummary} cartDetails={cartDetails} />
       </div>
     </div>
   );
