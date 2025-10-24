@@ -11,7 +11,7 @@ const DeliveryInformation = ({ deliveryDetails, setDeliveryDetails }) => {
     }));
   };
   return (
-    <div className="sm:w-6/12 gap-4 p-4 border border-gray-200 rounded-lg mb-4">
+    <div className="sm:w-6/12 gap-4 bg-white p-4 border border-gray-200 rounded-lg mb-4">
       <p className="font-semibold sm:text-2xl text-xl mb-3">Delivery Information</p>
       <Separator />
       <Label className="mb-2 mt-3 text-md">Full Name</Label>

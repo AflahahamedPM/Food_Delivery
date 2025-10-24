@@ -1,13 +1,15 @@
+import useAlert from "@/Hooks/useAlert";
 import React, { useEffect, useState } from "react";
 
 const useServices = () => {
   const [cartDetails, setCartDetails] = useState({});
   const [orderSummary, setOrderSummary] = useState({
     subtotal: "",
-    deliveryFee: 0.00,
+    deliveryFee: 0.0,
     total: "",
   });
-  
+  const { publishNotification } = useAlert();
+
   useEffect(() => {
     getCartDetails();
   }, []);
@@ -69,7 +71,15 @@ const useServices = () => {
     if (!item) return;
 
     if (type === "increment") {
-      item.qty += 1;
+      if (item?.maxQty === item?.qty) {
+        publishNotification(
+          `You have reached the maximum available quantity for ${item?.name}`,
+          "error"
+        );
+        return;
+      } else {
+        item.qty += 1;
+      }
     } else if (type === "decrement") {
       item.qty = Math.max(item.qty - 1, 0);
     }
@@ -83,7 +93,7 @@ const useServices = () => {
     cartDetails,
     removeFromCart,
     updateCartCount,
-    orderSummary
+    orderSummary,
   };
 };
 

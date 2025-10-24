@@ -11,7 +11,7 @@ const Footer = () => {
   return (
     <>
       {!shouldHideFooter && (
-        <footer className="bg-gray-200 px-6 sm:px-12 py-10 mt-10 w-full overflow-x-hidden">
+        <footer className="bg-gray-50 pl-6 sm:pl-12 py-10 mt-10 w-full overflow-x-hidden">
           <div className="text-center mb-10">
             <p className="text-xl sm:text-2xl font-semibold italic text-gray-700 max-w-2xl mx-auto">
               “Good food delivered fast, happiness delivered faster.”

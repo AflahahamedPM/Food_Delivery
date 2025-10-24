@@ -8,9 +8,23 @@ const useServices = () => {
   const { publishNotification } = useAlert();
   const [filteredRestaurents, setFilteredRestaurents] =
     useState(restaurentDatas);
-  const [filteredMenu, setFilteredMenu] = useState([]);
   const [restaurents, setRestaurents] = useState(restaurentDatas);
-  const [menuKeyWord,setMenuKeyword] = useState("");
+  const [menuKeyWord, setMenuKeyword] = useState("");
+  const [filteredMenu, setFilteredMenu] = useState([]);
+
+  const syncMenuWithCart = (menuData) => {
+    const savedCarts = JSON.parse(localStorage.getItem("allCartDatas")) || [];
+    const userDetails = JSON.parse(localStorage.getItem("loggedInUserDetails"));
+    const userCart = savedCarts.find(
+      (cart) => cart.email === userDetails?.email
+    );
+
+    return menuData.map((item) => ({
+      ...item,
+      isInCart:
+        userCart?.cart?.some((cartItem) => cartItem.uId === item.uId) || false,
+    }));
+  };
 
   const handleAddToCart = (foodData) => {
     if (!isLoggedIn) {
@@ -22,6 +36,20 @@ const useServices = () => {
     let allCarts = JSON.parse(localStorage.getItem("allCartDatas")) || [];
 
     let userCart = allCarts.find((data) => data.email === userDetails.email);
+
+    if (userCart.cart.length > 0) {
+      const isDifferentRestaurent = userCart.cart.some(
+        (item) => item.resId !== foodData.resId
+      );
+
+      if (isDifferentRestaurent) {
+        publishNotification(
+          "Some items in your cart are from a different restaurant. You cannot add this item.",
+          "error"
+        );
+        return;
+      }
+    }
 
     const alreadyInCart = userCart.cart.some(
       (item) => item.uId === foodData.uId
@@ -39,22 +67,23 @@ const useServices = () => {
     );
 
     localStorage.setItem("allCartDatas", JSON.stringify(allCarts));
-
     publishNotification("Item added to cart!", "success");
+    return "success"
   };
 
   const handleInputChange = (e, label, resId) => {
     const searchKey = e.target.value;
 
-    if (label === "Search Menu") {
-        setMenuKeyword(searchKey)
-      const restaurent = restaurents?.filter(
-        (resData) => resData?.uId === resId
-      );
+    if (label === "Search by menu") {
+      setMenuKeyword(searchKey);
 
-      const filteredMenu = restaurent[0]?.menu?.filter((menuData) =>
+      const restaurent = restaurents?.find((resData) => resData?.uId === resId);
+
+      let filteredMenu = restaurent?.menu?.filter((menuData) =>
         menuData?.name.toLowerCase().includes(searchKey.toLowerCase())
       );
+
+      filteredMenu = syncMenuWithCart(filteredMenu || []);
 
       setFilteredMenu(filteredMenu);
     } else {
@@ -71,7 +100,7 @@ const useServices = () => {
     restaurents,
     filteredRestaurents,
     filteredMenu,
-    menuKeyWord
+    menuKeyWord,
   };
 };
 

@@ -11,7 +11,7 @@ const Restaurent = () => {
       <div className="sm:flex justify-between">
         <p className="text-4xl font-bold mb-5">Restaruants</p>
         <SearchInput
-          label="Search Restaurent"
+          label="Search by restaurant name"
           handleInputChange={handleInputChange}
         />
       </div>

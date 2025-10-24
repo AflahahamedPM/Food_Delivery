@@ -55,7 +55,10 @@ const useServices = () => {
     }
 
     publishNotification("Successfully logged in", "success");
-    await localStorage.setItem("loggedInUserDetails", JSON.stringify(userExists));
+    await localStorage.setItem(
+      "loggedInUserDetails",
+      JSON.stringify(userExists)
+    );
     await isLogin();
     router.push("/");
   };
@@ -66,9 +69,19 @@ const useServices = () => {
       !registerDetails?.password ||
       !registerDetails?.fullName
     ) {
-      publishNotification("Pleas fill all the required fields", "error");
+      publishNotification("Please fill all the required fields", "error");
       return;
     }
+
+    const name = registerDetails?.fullName || "";
+
+    const letterCount = name.replace(/[^a-zA-Z]/g, "").length;
+
+    if (letterCount < 3) {
+      publishNotification("Name should contain at least 3 alphabets", "error");
+      return;
+    }
+
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (registerDetails?.email && !emailPattern.test(registerDetails?.email)) {
       publishNotification("Please enter a valid email", "error");

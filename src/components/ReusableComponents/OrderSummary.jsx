@@ -15,26 +15,24 @@ const OrderSummary = ({
   const { publishNotification } = useAlert();
   return (
     <div
-      className={`sm:w-4/12 max-sm:w-full gap-4 p-4 border border-gray-200 rounded-lg mb-4 ${
+      className={`sm:w-4/12 max-sm:w-full gap-4 p-4 border bg-white border-gray-200 rounded-lg mb-4 ${
         isCheckoutPage ? "" : "lg:h-62 h-full"
       } `}
     >
       <p className="font-semibold text-2xl mb-3">Order Summary</p>
       {isCheckoutPage && (
         <>
-          {cartDetails?.cart?.map((cartData) => (
-            <>
-              <div key={cartData?.uId} className="flex justify-between mb-4">
-                <div>
-                  <p className="text-gray-400">{cartData?.name}</p>
+          {cartDetails?.cart?.map((cartData, i) => (
+            <div key={cartData?.uId} className="flex justify-between mb-4">
+              <div>
+                <p className="text-gray-400">{cartData?.name}</p>
 
-                  <p className="text-gray-300 text-xs">
-                    Quantity - {cartData?.qty}
-                  </p>
-                </div>
-                <p>₹{cartData?.price}</p>
+                <p className="text-gray-300 text-xs">
+                  Quantity - {cartData?.qty}
+                </p>
               </div>
-            </>
+              <p>₹{cartData?.price}</p>
+            </div>
           ))}
           <Separator className="mb-3" />
         </>
@@ -64,7 +62,7 @@ const OrderSummary = ({
       </div>
 
       <Button
-        className="w-full text-md cursor-pointer"
+        className="w-full text-md cursor-pointer bg-[#F1B654] hover:bg-[#F1B654]"
         onClick={
           isCheckoutPage
             ? submitOrder

@@ -14,7 +14,7 @@ const CartDatas = ({ data, removeFromCart, updateCartCount }) => {
         data?.cart?.map((c, i) => (
           <div
             key={i}
-            className="flex flex-col sm:flex-row justify-between items-center gap-4 p-4 border border-gray-200 rounded-lg mb-4"
+            className="flex bg-white flex-col sm:flex-row justify-between items-center gap-4 p-4 border border-gray-200 rounded-lg mb-4"
           >
             <div className="flex gap-4 items-center w-full sm:w-auto">
               <div className="w-[100px] h-[100px] sm:w-[180px] sm:h-[120px] relative">
@@ -35,14 +35,14 @@ const CartDatas = ({ data, removeFromCart, updateCartCount }) => {
             <div className="flex gap-2 items-center">
               <div className="flex gap-2 items-center justify-center">
                 <Button
-                  className="bg-white hover:bg-white text-gray-600 text-2xl"
+                  className="bg-white hover:bg-white text-gray-600 text-2xl cursor-pointer"
                   onClick={() => c?.qty > 1 && updateCartCount("decrement", c)}
                 >
                   -
                 </Button>
                 <p className="text-lg">{c?.qty}</p>
                 <Button
-                  className="bg-white hover:bg-white text-gray-600 text-2xl"
+                  className="bg-white hover:bg-white text-gray-600 text-2xl cursor-pointer"
                   onClick={() => updateCartCount("increment", c)}
                 >
                   +

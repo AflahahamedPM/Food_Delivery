@@ -1,4 +1,3 @@
-
 "use client";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
@@ -33,52 +32,54 @@ const Header = () => {
   }, [isOpen]);
 
   return (
-    <header className="relative z-50 w-11/12 mx-auto flex justify-between items-center py-3">
-  
-      {!shouldHideHeader && (
-        <button
-          className="sm:hidden flex items-center"
-          onClick={() => setIsOpen(true)}
-        >
-          <Menu size={28} />
-        </button>
-      )}
-
-      {!shouldHideHeader && (
-        <h1
-          className="sm:text-3xl max-sm:text-xl font-bold cursor-pointer"
-          onClick={() => router.push("/")}
-        >
-          Foodlivery
-        </h1>
-      )}
-
-      
-      {!shouldHideHeader && (
-        <div className="hidden sm:flex gap-6 font-bold text-xl">
-          {navbarData?.map((data) => (
-            <Link key={data?.uId} href={data?.url}>
-              {data?.title}
-            </Link>
-          ))}
-        </div>
-      )}
-
-      
-      {!shouldHideHeader && (
-        <div className="mt-2">
-          <Button
-            className="cursor-pointer"
-            onClick={
-              isLoggedIn ? () => logout() : () => router.push("/auth/login")
-            }
+    <header className="max-sm:px-2 sticky top-0 z-500 bg-white shadow-md py-3">
+      <div className="sm:px-12 flex justify-between w-full items-center">
+        {!shouldHideHeader && (
+          <button
+            className="sm:hidden flex items-center"
+            onClick={() => setIsOpen(true)}
           >
-            {isLoggedIn ? "Log out" : "Login"}
-          </Button>
-        </div>
-      )}
+            <Menu size={28} />
+          </button>
+        )}
 
-      
+        {!shouldHideHeader && (
+          <h1
+            className="sm:text-3xl max-sm:text-xl font-semibold cursor-pointer"
+            onClick={() => router.push("/")}
+          >
+            Foodlivery
+          </h1>
+        )}
+
+        {!shouldHideHeader && (
+          <div className="hidden sm:flex gap-6 font-semibold text-xl">
+            {navbarData?.map((data) => (
+              <Link
+                key={data?.uId}
+                href={data?.url}
+                className="hover:text-[#f1b654]"
+              >
+                {data?.title}
+              </Link>
+            ))}
+          </div>
+        )}
+
+        {!shouldHideHeader && (
+          <div className="mt-2">
+            <Button
+              className="cursor-pointer"
+              onClick={
+                isLoggedIn ? () => logout() : () => router.push("/auth/login")
+              }
+            >
+              {isLoggedIn ? "Log out" : "Login"}
+            </Button>
+          </div>
+        )}
+      </div>
+
       {isOpen && (
         <div className="fixed inset-0 bg-black/40 z-40 transition-opacity"></div>
       )}

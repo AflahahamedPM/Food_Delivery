@@ -1,14 +1,9 @@
-import FeaturedRestaurents from "@/components/home/FeaturedRestaurents";
-import Herosection from "@/components/home/Herosection";
-import TodaysPicks from "@/components/home/TodaysPicks";
-import Image from "next/image";
+import HomeComponent from "@/components/home/HomeComponent";
 
 export default function Home() {
   return (
-    <div className="">
-      <Herosection />
-      <TodaysPicks />
-      <FeaturedRestaurents />
+    <div className="min-h-screen">
+      <HomeComponent />
     </div>
   );
 }
