@@ -9,9 +9,15 @@ const Herosection = () => {
         src={heroSectionImg}
         alt="Hero section"
         fill
-        className="object-cover object-center"
+        className="object-cover object-center brightness-75" 
         priority
       />
+
+      <div className="absolute inset-0 flex items-center justify-center">
+        <h1 className="text-white text-4xl sm:text-6xl font-extrabold text-center drop-shadow-lg">
+          Get your food on door
+        </h1>
+      </div>
     </div>
   );
 };

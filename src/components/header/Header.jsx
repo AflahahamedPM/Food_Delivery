@@ -18,7 +18,6 @@ const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef();
 
-  // 🧠 Close drawer when clicking outside
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (menuRef.current && !menuRef.current.contains(e.target)) {
