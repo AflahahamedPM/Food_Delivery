@@ -3,14 +3,16 @@ import React from "react";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "../ui/button";
 import { useRouter } from "next/navigation";
+import useAlert from "@/Hooks/useAlert";
 
 const OrderSummary = ({
   orderSummary,
   cartDetails,
   isCheckoutPage = false,
-  submitOrder
+  submitOrder,
 }) => {
   const router = useRouter();
+  const { publishNotification } = useAlert();
   return (
     <div
       className={`sm:w-4/12 max-sm:w-full gap-4 p-4 border border-gray-200 rounded-lg mb-4 ${
@@ -63,7 +65,14 @@ const OrderSummary = ({
 
       <Button
         className="w-full text-md cursor-pointer"
-        onClick={ isCheckoutPage ? submitOrder : () => router.push("/checkout")}
+        onClick={
+          isCheckoutPage
+            ? submitOrder
+            : () =>
+                cartDetails?.cart?.length === 0
+                  ? publishNotification("Cart is Empty", "error")
+                  : router.push("/checkout")
+        }
       >
         {isCheckoutPage ? "Place Order" : "Proceed to Checkout"}
       </Button>
