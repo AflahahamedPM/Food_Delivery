@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Menu from "../ReusableComponents/Menu";
 import useServices from "@/app/restaurents/useServices";
 import SearchInput from "../ReusableComponents/SearchInput";
@@ -26,7 +26,7 @@ const RestaurentMenu = ({ restaurentData }) => {
     setMenuWithCart(updatedMenu);
   }, [restaurentData]);
 
-  const handleAddAndUpdateUI = async (foodData) => {
+  const handleAddAndUpdateUI = useCallback(async (foodData) => {
     const response = await handleAddToCart(foodData);
     if (response === "success") {
       setMenuWithCart((prev) =>
@@ -35,7 +35,7 @@ const RestaurentMenu = ({ restaurentData }) => {
         )
       );
     }
-  };
+  }, []);
 
   const renderData = menuKeyWord?.length > 0 ? filteredMenu : menuWithCart;
 
