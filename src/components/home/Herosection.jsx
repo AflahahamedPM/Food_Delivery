@@ -74,7 +74,7 @@ const Herosection = () => {
           </motion.div>
 
           <div className="max-lg:hidden relative h-[600px]">
-            {/* Main Featured Card */}
+            
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -95,7 +95,6 @@ const Herosection = () => {
               </div>
             </motion.div>
 
-            {/* Top Left Card */}
             <motion.div
               initial={{ opacity: 0, x: -50, y: -50 }}
               animate={{ opacity: 1, x: 0, y: 0 }}
@@ -118,7 +117,6 @@ const Herosection = () => {
               </div>
             </motion.div>
 
-            {/* Top Right Card */}
             <motion.div
               initial={{ opacity: 0, x: 50, y: -50 }}
               animate={{ opacity: 1, x: 0, y: 0 }}
@@ -141,7 +139,6 @@ const Herosection = () => {
               </div>
             </motion.div>
 
-            {/* Bottom Right Card */}
             <motion.div
               initial={{ opacity: 0, x: 50, y: 50 }}
               animate={{ opacity: 1, x: 0, y: 0 }}
@@ -164,7 +161,6 @@ const Herosection = () => {
               </div>
             </motion.div>
 
-            {/* Decorative Elements */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
